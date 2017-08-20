@@ -1,0 +1,287 @@
+<head>
+  <title>PPM NASA Ames</title>
+  <link rel="icon" href="https://c1.staticflickr.com/5/4325/35151713404_de0df67783_o.png">
+  <link href="https://fonts.googleapis.com/css?family=Covered+By+Your+Grace|Raleway:100,500,600,800" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Orbitron" rel="stylesheet"> 
+  <link rel="stylesheet" type="text/css" href="style.css">
+    
+    <style> /* Map Styling */
+    #map {
+      width: 100%;
+      height: 300px;
+    }</style>
+    
+        <style>
+    
+        * { box-sizing: border-box; }
+
+        /* force scrollbar */
+        html { overflow-y: scroll; }
+
+        body { font-family: sans-serif; }
+
+        /* ---- grid ---- */
+        .grid {
+            background: ;
+        }
+
+        /* clear fix */
+        .grid:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        /* ---- .grid-item ---- */
+        .grid-sizer,
+        .grid-item {
+            width: 32.55%;
+            margin-bottom: 10px;
+        }
+
+        .grid-item {
+            float: left;
+        }
+
+        .grid-item img {
+            display: block;
+            max-width: 100%;
+        }
+    
+    </style> 
+
+</head>
+    
+<body>
+
+    <div class="footerU">
+        <h1>People's Particle Monitor [PPM]</h1>
+    </div>
+
+    <div class="general"> 
+        <p> Temporary page for PPM, includes data-upload, mapping, and other visualization </p>
+        
+    <h3>Data Collection Locations</h3></div>
+        
+    <div id="map"></div>
+    
+    <script>      
+   /* var customLabel = {
+                        restaurant: {
+                          label: 'R'
+                        },
+                        bar: {
+                          label: 'B'
+                        }
+                      }; */ // Option to add custom labels to markers
+
+        function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(39.30506,-97.558594),
+          zoom: 4
+        });
+        var infoWindow = new google.maps.InfoWindow;
+
+          // Change this depending on the name of your PHP or XML file
+          downloadUrl('http://www.mahdial-husseini.com/xmlthing.php', function(data) {
+            var xml = data.responseXML;
+            var markers = xml.documentElement.getElementsByTagName('PPM1_0');
+            Array.prototype.forEach.call(markers, function(markerElem) {
+              // var id = markerElem.getAttribute('sample');
+              var name = markerElem.getAttribute('sample');
+              var site = markerElem.getAttribute('site');
+              var PM25_Hourly = markerElem.getAttribute('PM25_Hourly');
+              var day = markerElem.getAttribute('day');
+              var month = markerElem.getAttribute('month');
+              var year = markerElem.getAttribute('year');
+              var rel_humid = markerElem.getAttribute('rel_humid');
+              var pressure = markerElem.getAttribute('pressure');
+              var altitude = markerElem.getAttribute('altitude');
+              var temp_C = markerElem.getAttribute('temp_C');
+           // var type = markerElem.getAttribute('type'); // For custom labels
+              var point = new google.maps.LatLng(
+                  parseFloat(markerElem.getAttribute('lat')),
+                  parseFloat(markerElem.getAttribute('lng')));
+
+              var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = 'Coordinates: ' + point
+              infowincontent.appendChild(strong);
+              infowincontent.appendChild(document.createElement('br'));
+                
+              var text = document.createElement('text');
+              text.textContent = 'Initial Collection Date: ' + month + '/' + day + '/' + year
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+                
+              var text = document.createElement('text');
+              text.textContent = 'Relative Humidity (): ' + rel_humid
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+                
+              var text = document.createElement('text');
+              text.textContent = 'Temperature (C): ' + temp_C
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+                
+              var text = document.createElement('text');
+              text.textContent = 'Altitude (m): ' + altitude
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+                
+              var text = document.createElement('text');
+              text.textContent = 'Pressure (): ' + pressure
+              infowincontent.appendChild(text);
+              infowincontent.appendChild(document.createElement('br'));
+              infowincontent.appendChild(document.createElement('br'));
+               
+              var text = document.createElement('text');
+              text.textContent = 'Optional Site Tag: ' + site
+              infowincontent.appendChild(text);       
+                
+                
+              /* var icon = customLabel[type] || {}; */
+              var marker = new google.maps.Marker({
+                map: map,
+                position: point,
+            //  label: icon.label // For custom labels
+              });
+              marker.addListener('click', function() {
+                infoWindow.setContent(infowincontent);
+                infoWindow.open(map, marker);
+              });
+            });
+          });
+        }
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+
+      function doNothing() {}</script>
+        
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD819WcvpEcFHTWi2DXRjGU6Xaenzkx4_0&callback=initMap">
+    </script> 
+    
+    <div class="general"> 
+        
+    <h3>Data Visualization</h3>
+        
+    <h3>Additional Information</h3>
+     
+        
+        <button class="accordion"> Particulate Matter [PM] </button>
+        <div class="panel">
+            <p>Select an icon on the Google Maps to view additional information</p>
+            
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        </div>    
+        
+        <p></p>
+        
+        <button class="accordion"> Project Documentation </button>
+        <div class="panel">
+            <p><a href="https://drive.google.com/open?id=0B8BDkVuaOs8Ua3VYWER4Qld0OTg">PPM Software Guide [Authorized Access]</a></p>
+            <p><a href="https://drive.google.com/open?id=0B8BDkVuaOs8UWTY3R0wyTmh6STQ">PPM Presentation</a></p>
+            <p><a href="https://github.com/csapidus/ppm">GitHub Repository [Authorized Access]</a></p>
+        </div>  
+        
+        <p></p>
+        
+        <div class="grid">
+            
+          <div class="grid-sizer"></div>
+            
+          <div class="grid-item">
+            <img src="https://c1.staticflickr.com/5/4221/34702905376_1ce12ffaaf_b.jpg" />
+          </div>
+            
+          <div class="grid-item">
+            <img src="https://c1.staticflickr.com/5/4246/34743130085_b294f1d086_b.jpg" />
+          </div>
+            
+          <div class="grid-item">
+            <img src="https://c1.staticflickr.com/5/4167/33934082363_dd7694a335_b.jpg" />
+          </div>
+            
+        </div>
+        
+        <p></p>    
+            
+    <h3>Download Data-Set</h3>    
+        
+    <form>
+        <fieldset>
+            <a href="http://www.mahdial-husseini.com/drupal-7.56/timestamp-full_global_ppm_data.xls"> <img class="img-icon" src="https://c1.staticflickr.com/5/4289/35921183555_cc6b349770_o.png"></a>
+            <a href="http://www.mahdial-husseini.com/drupal-7.56/timestamp-full_global_ppm_data.xml"> <img class="img-icon" src="https://c1.staticflickr.com/5/4304/35217611784_5b8d53121a_o.png"></a>
+            <a href="http://www.mahdial-husseini.com/drupal-7.56/timestamp-full_global_ppm_data.csv"> <img class="img-icon" src="https://c1.staticflickr.com/5/4295/35717895812_f7fb7ed40b_o.png"></a>
+        </fieldset>
+    </form>
+        
+    <p></p>
+
+ <h3><a href="http://mahdial-husseini.com">Return to Homepage</a></h3>
+        
+ <p></p>
+        
+ <h3><a href="http://www.mahdial-husseini.com/drupal-7.56/import/ppm1_0">Upload Data from PPM</a></h3>
+        
+ <p></p>
+
+</div>
+    
+        <script> 
+            var acc = document.getElementsByClassName("accordion");
+            var i;
+
+            for (i = 0; i < acc.length; i++) {
+              acc[i].onclick = function() {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight){
+                  panel.style.maxHeight = null;
+                } else {
+                  panel.style.maxHeight = panel.scrollHeight + "px";
+                } 
+              }
+            }
+    </script>
+    
+<script src="jquery-3.2.1.min.js"></script>
+<script src='../../../masonry.pkgd.min.js'></script>
+<!-- <script src="js/bootstrap.min.js"></script> -->
+<script src="../../../imagesloaded.pkgd.js"></script>
+    
+<script>
+    
+    var $grid = $('.grid').masonry({
+      itemSelector: '.grid-item',
+      percentPosition: true,
+      columnWidth: '.grid-sizer',
+      gutter: 10
+    });
+    // layout Isotope after each image loads
+    $grid.imagesLoaded().progress( function() {
+      $grid.masonry('layout');
+    });  
+    
+</script>
+
+</body>
+
+<div class="footerU">
+    <h1></h1>
+</div>

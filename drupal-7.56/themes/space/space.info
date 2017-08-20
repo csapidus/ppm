@@ -1,0 +1,7 @@
+name = space
+description = This custom theme is to be used for the NASA Ames PPM project
+core = 7.x
+screenshot = screenshot.jpg
+package = Core
+engine = phptemplate
+stylesheets[all][] = style.css

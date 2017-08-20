@@ -1,0 +1,150 @@
+/***** SPACE THEME FOR NASA PPM PROJECT, Mahdi Al-Husseini *****/
+
+/* Structural Elements */
+
+.general {
+    position: relative;
+    text-align: justify;
+    width: 50%;
+    height: 100%;
+    margin: auto;   
+} 
+
+body {
+  padding: 0px;
+  margin: 0px;
+  background: snow;
+  /* Old browsers */
+  background: -moz-linear-gradient(45deg, snow 0%, snow 100%);
+  /* FF3.6-15 */
+  background: -webkit-linear-gradient(45deg, snow 0%, snow 100%);
+  /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(45deg, snow 0%, snow 100%);
+}
+
+/* Header
+
+.headerU {
+  background: url("https://c1.staticflickr.com/3/2488/32150102944_5fd8123c66_b.jpg") repeat center center;
+  height: 200px;
+} 
+*/
+
+/* Footer */
+
+.footerU {
+  background: url("https://c1.staticflickr.com/5/4299/35885543062_b2c6b9c9f5_o.jpg") repeat center top;
+  height: 150px;
+}
+
+/* Additional Footer URL Choices:
+    NOT Public Domain: https://c1.staticflickr.com/3/2488/32150102944_5fd8123c66_b.jpg 
+    Public Domain: https://c1.staticflickr.com/5/4298/36056800155_d80ebe5b35_o.jpg
+    Public Domain: https://c1.staticflickr.com/5/4299/35885543062_b2c6b9c9f5_o.jpg */
+
+/* Section Headings */
+
+h1 {
+  color: seagreen;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 60px;
+  line-height: 76px;
+  margin: 0;
+  position: relative;
+  text-align: center;
+  top: 20%;
+}
+
+h2 {
+  color: seagreen;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 28px;
+  font-weight: 500;
+  text-align: left;
+  text-transform: uppercase;
+  background-color: silver;
+  
+}
+
+/* Interactive Accordion Buttons */
+
+button.accordion {
+    cursor: pointer;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    transition: 0.4s;
+    color: seagreen;
+    font-family: 'Orbitron', sans-serif;
+    font-size: 28px;
+    font-weight: 500;
+    text-transform: uppercase;
+    background-color: silver;
+}
+
+button.accordion.active, button.accordion:hover {
+    background-color: #ddd;
+}
+
+button.accordion:after {
+    content: '\002B';
+    color: #777;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+}
+
+button.accordion.active:after {
+    content: "\2212";
+}
+
+div.panel {
+    padding: 0 18px;
+    background-color: ;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 2s ease-out;
+    -moz-transition: height 2s; /* Firefox 4 */
+    -webkit-transition: height 2s; /* Safari and Chrome */
+    -o-transition: height 2s; /* Opera */
+}
+
+/* Download Icon */
+
+.img-icon {
+  width: 20% ;
+  height: 20% ;
+  float: left;
+
+}
+
+/* Bottom Ledger
+
+.js {
+background-color:;
+} */
+
+/* Miscellaneous */
+
+p {
+  color: #444444;
+  line-height: 32px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 20px;
+  font-weight: 100;
+}
+
+a {
+  color: #214E34;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 900;
+  text-align: left;
+  text-transform: uppercase;
+  text-decoration: none;
+  letter-spacing: 2px;
+}
+
+
+/***** For questions regarding this file, please reach out to Mahdi at mahdi07@msn.com, 404-771-3315 *****csapidus/
